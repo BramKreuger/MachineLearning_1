@@ -8,18 +8,48 @@ namespace MLassignment1Csharp
     {
 
         List<Person> trainingData = new List<Person>();
+        List<Person> testData = new List<Person>();
 
         static void Main(String[] args)
         {
             KNNAssignment main = new KNNAssignment();
 
             main.LoadFile("credit_train.txt", main.trainingData);
+            main.LoadFile("credit_test.txt", main.testData);
             //main.PrintList(main.trainingData);
-            computeDistance(main.trainingData[0], main.trainingData[1]);
+            AssignAllTestData(main.trainingData, main.testData);
+            ComputeDistance(main.trainingData[0], main.trainingData[1]);
             Console.ReadLine();
         }
 
-        static double computeDistance(Person p1, Person p2)
+        static void AssignAllTestData(List<Person> trainingPersons, List<Person> testPersons)
+        {
+            int changedYCount = 0;
+
+            foreach (Person pTest in testPersons) //Loop door de testdata heen
+            {                
+                double nearestNeighbourDist = double.MaxValue;
+                Person nearestNeighbourPers = null;
+                foreach (Person pTrain in trainingPersons) //Loop door de trainingsdata heen
+                {
+                    double dist = ComputeDistance(pTest, pTrain);
+                    if (dist < nearestNeighbourDist) 
+                    {
+                        nearestNeighbourDist = dist;
+                        nearestNeighbourPers = pTrain;
+                    }                    
+                }
+                if(pTest.y != nearestNeighbourPers.y) //Tel de hoeveelheid veranderingen
+                {
+                    changedYCount++;
+                }
+                pTest.y = nearestNeighbourPers.y; //Assign de y waarde v/d dichtsbijzijnde train data                
+            }
+            Console.WriteLine(changedYCount);
+            Console.WriteLine(changedYCount / testPersons.Count * 100);
+        }
+
+        static double ComputeDistance(Person p1, Person p2)
         {
             double[] varDistances = new double[16];
             //Loop door de catagorische variabelen heen

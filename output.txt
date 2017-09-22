@@ -1,0 +1,17 @@
+
+Bram Kreuger - 5990653 | Floris van Voorst tot Voorst - 5990076
+
+Percentage Opdracht 1.
+66.5217391304348
+
+Percentage Opdracht 2.
+82.1739130434783
+
+Percentage Opdracht 3.
+84.3478260869565
+
+Percentage Opdracht 4.
+
+K = 1: 84.3478260869565
+K = 3: 86.5217391304348
+K = 5: 87.3913043478261

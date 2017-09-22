@@ -49,7 +49,7 @@ namespace MLassignment1Csharp
 					int changedIndex = 0;
 
 					for (int z = 0; z < k; z++) {
-						if (dist < nearestNeighboursDist[z]) {
+						if (dist < nearestNeighboursDist[z] && nearestNeighboursDist[changedIndex] <= nearestNeighboursDist[z]) {
 							changeIndex  = true;
 							changedIndex = z;
 						}
